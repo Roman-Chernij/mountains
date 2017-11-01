@@ -1,0 +1,12 @@
+.logo {
+   &-inner {
+      font: 29px/1.5 $font1;
+      color: #9daeb6;
+      &:hover {
+         text-decoration: none;
+      }
+      &__item {
+         color: #36aeea;
+      }
+   }
+}
