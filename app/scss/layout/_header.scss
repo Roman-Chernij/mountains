@@ -1,6 +1,25 @@
 .header {
-   background: url('../img/header-bg.jpg');
+   background: url('../img/header-bg.jpg') 50%, 50%;
+   background-repeat: no-repeat;
+   background-size: cover;
+   background-attachment: fixed;
+   background-position: 50%, 50%;
+   min-height: 698px;
+   transition: .5s;
+//    &:hover {
+// filter: blur(1px);
+// transition: .5s;
+//    }
    &-top {
-      background-color: #fefefe;
+      background-color: rgba(28, 28, 28, .2);
+      transition: background-color ease-in-out .35s;
+      padding: 20px 0;
+      &:hover {
+         background-color: rgba(254, 254, 254, .65);
+         transition: background-color ease-in-out .35s;
+      }
+      &-line {
+         @include clearfix;
+      }
    }
 }

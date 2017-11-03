@@ -1,7 +1,9 @@
 .logo {
+   max-width: 118px;
+   float: left;
    &-inner {
       font: 29px/1.5 $font1;
-      color: #9daeb6;
+      color: $color2;
       &:hover {
          text-decoration: none;
       }

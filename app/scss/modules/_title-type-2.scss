@@ -1,0 +1,21 @@
+.title-type-2 {
+  font: 34px/1.5 $font2;
+  color: #000;
+  text-transform: uppercase;
+  position: relative;
+  margin-bottom: 16px;
+  padding-top: 33px;
+  text-align: center;
+  &::before {
+    content: '';
+    width: 82px;
+    height: 7px;
+    background-image: url('../img/title-decor.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    top: 7px;
+    left: 50%;
+    transform: translate(-50%, 50%);
+  }
+}

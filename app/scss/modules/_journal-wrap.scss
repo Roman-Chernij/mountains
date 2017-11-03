@@ -1,0 +1,7 @@
+.journal-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  &__post {
+    display: flex;
+  }
+}

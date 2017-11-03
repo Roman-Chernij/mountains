@@ -1,0 +1,58 @@
+.about-us {
+   &__container{
+      background-image: url('../img/decorMap-type-1.png');
+      background-repeat: no-repeat;
+      background-size: auto;
+      background-position: 112px -3px;
+      display: flex;
+      justify-content: space-between;
+   }
+   &-info {
+      width: 45%;
+      padding: 0 2px ;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      &__description {
+         color: #9b9a9a;
+         font:15px/1.7 $font4;
+         width: 75%;
+         margin-bottom: 10px;
+
+      }
+      &__link {
+         font:13px/1.5 $font2;
+         color: #fff;
+         background-color: $color1;
+         text-transform: uppercase;
+         padding: 12px 30px 12px;
+         display: inline-block;
+      }
+      &__block-btn {
+         padding-top: 15px;
+      }
+   }
+   &-images {
+      position: relative;
+      width: 55%;
+      &__large {
+         margin: -62px -219px 0 35px;
+         max-width: 806px;
+         max-height: 569px;
+         img {
+            width: 100%;
+         }
+      }
+      &__small {
+         position: absolute;
+         bottom: -94px;
+         left: -54px;
+         max-width: 350px;
+         max-height: 350px;
+
+         img {
+            width: 100%;
+         }
+      }
+   }
+}
