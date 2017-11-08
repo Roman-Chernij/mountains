@@ -1,22 +1,21 @@
 .call-us {
-   border: 1px solid $color1;
-   border-radius: 10px;
+
+
    max-width: 154px;
    float: right;
    display: block;
-   &:hover {
-      border: 1px solid darken($color1, 20%);
-      .call-us__link {
-         color: darken($color1, 20%);
 
-      }
-   }
    &__link {
       color: $color1;
+      border: 1px solid $color1;
       padding: 15px 43px;
       font: 16px/1 $font3;
       text-transform: uppercase;
       display: block;
-
+      border-radius: 10px;
+      &:hover {
+         border: 1px solid darken($color1, 20%);
+         color: darken($color1, 20%);
+      }
    }
 }

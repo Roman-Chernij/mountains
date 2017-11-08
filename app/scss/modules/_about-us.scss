@@ -55,4 +55,29 @@
          }
       }
    }
+   @media (max-width: $media-lg-xx) {
+      &-images {
+         &__large {
+            margin: -62px -219px 0 35px;
+            max-width: 700px;
+            max-height: 469px;
+         }
+      }
+   }
+   @media (max-width: $media-lg-x) {
+      &-images {
+         &__large {
+            margin: 0;
+            max-width: 100%;
+            max-height: 469px;
+         }
+         &__small {
+            position: absolute;
+            bottom: -94px;
+            left: -54px;
+            max-width: 250px;
+            max-height: 250px;
+         }
+      }
+   }
 }

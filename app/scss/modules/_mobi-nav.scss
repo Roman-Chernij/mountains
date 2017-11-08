@@ -1,0 +1,11 @@
+.mobi-nav {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  .nav-list {
+    flex-direction: column;
+    &__item {
+      padding: 10px 0;
+    }
+  }
+}

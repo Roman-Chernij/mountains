@@ -6,10 +6,6 @@
    background-position: 50%, 50%;
    min-height: 698px;
    transition: .5s;
-//    &:hover {
-// filter: blur(1px);
-// transition: .5s;
-//    }
    &-top {
       background-color: rgba(28, 28, 28, .2);
       transition: background-color ease-in-out .35s;
@@ -20,6 +16,24 @@
       }
       &-line {
          @include clearfix;
+         position: relative;
+      }
+   }
+   &-fixed {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background-color: #fff;
+      z-index:1;
+      padding: 0;
+      transition: padding ease-in-out .3s;
+      .call-us {
+         padding-top: 5px;
+         &__link {
+            font-size: 14px;
+            padding: 10px 43px;
+         }
       }
    }
 }
