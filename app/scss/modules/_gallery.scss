@@ -1,0 +1,14 @@
+$padding: 15;
+
+.gallery {
+   &-inner {
+      margin: 0 #{-$padding}px;
+      &__item {
+         padding: 0 #{$padding}px #{$padding * 2}px;
+         width: 33.33%;
+         img {
+           width: 100%;
+         }
+      }
+   }
+}

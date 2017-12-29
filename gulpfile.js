@@ -1,28 +1,31 @@
-    var gulp            = require('gulp'), // Подключаем Gulp
-        sass            = require('gulp-sass'),// компилатор с SCSS в CSS
-        browserSync     = require('browser-sync'),
-        concat          = require('gulp-concat'),// соединяет файлы
-        uglify          = require('gulp-uglifyjs'),// минифицирует JAVASCRIPT
-        rename          = require('gulp-rename'),//переименовывает файлы
-        autoprefixer    = require('gulp-autoprefixer'),//добавлеет префиксы CSS
-        del             = require('del'),
-        imagemin        = require('gulp-imagemin'), // Подключаем библиотеку для работы с изображениями
-        pngquant        = require('imagemin-pngquant'), // Подключаем библиотеку для работы с png
-        cache           = require('gulp-cache'); // кеш для картинок, при сборке продакшена экономит время....вроди
-        autopolyfiller  = require('gulp-autopolyfiller'),// добавляет поддрежку старых браузеров для JAVASCRIPT
-        merge           = require('event-stream').merge,
-        order           = require("gulp-order"),
-        babel           = require('gulp-babel'),
-        csso = require('gulp-csso'),
-        sourcemaps      = require('gulp-sourcemaps');
+    const gulp            = require('gulp'), // Подключаем Gulp
+          sass            = require('gulp-sass'),// компилатор с SCSS в CSS
+          browserSync     = require('browser-sync'),
+          concat          = require('gulp-concat'),// соединяет файлы
+          uglify          = require('gulp-uglifyjs'),// минифицирует JAVASCRIPT
+          rename          = require('gulp-rename'),//переименовывает файлы
+          autoprefixer    = require('gulp-autoprefixer'),//добавлеет префиксы CSS
+          del             = require('del'),
+          imagemin        = require('gulp-imagemin'), // Подключаем библиотеку для работы с изображениями
+          pngquant        = require('imagemin-pngquant'), // Подключаем библиотеку для работы с png
+          cache           = require('gulp-cache'); // кеш для картинок, при сборке продакшена экономит время....вроди
+          autopolyfiller  = require('gulp-autopolyfiller'),// добавляет поддрежку старых браузеров для JAVASCRIPT
+          merge           = require('event-stream').merge,
+          order           = require("gulp-order"),
+          babel           = require('gulp-babel'),
+          csso            = require('gulp-csso'),
+          sourcemaps      = require('gulp-sourcemaps'),
+          plumber         = require('gulp-plumber');
+
 
     //CSS files
-gulp.task('sass', function () {
+gulp.task('sass', () => {
      gulp.src([
         'app/libs/libs.scss',
         'app/scss/style.scss'
     ])
     .pipe(sourcemaps.init())
+    .pipe(plumber()) // plumber
     .pipe(sass.sync().on('error', sass.logError))
     .pipe(autoprefixer([
         'Android 2.3',
@@ -46,56 +49,25 @@ gulp.task('sass', function () {
     .pipe(browserSync.reload({stream: true}))
 });
 
-//JavaScript files
-// gulp.task('autopolyfiller',['babel'], function () {
-//         return gulp.src('app/js/script.babel.js')
-//             .pipe(autopolyfiller('polyfill.js', {
-//                 browsers: require('autoprefixer').default
-//             }))
-//             .pipe(gulp.dest('app/js'));
-// });
-//
-// // gulp.task('babel', function () {
-// //  return gulp.src([
-// //    "app/js/Helper.js",
-// //    "app/js/App.js",
-// //    "app/js/components/*.js"
-// //  ])
-// //      .pipe(concat('scripts.js'))
-// //      .pipe(babel({
-// //          presets: ['es2015']
-// //      }))
-// //      .pipe(rename({suffix: '.babel'}))
-// //      .pipe(gulp.dest('app/js'))
-// // });
-//
-// gulp.task('scripts',['autopolyfiller'], function () {
-//     return gulp.src([
-//         "app/js/polyfill.js",
-//         "app/libs/*.js",
-//         "app/js/scripts.babel.js"
-//     ])
-//         .pipe(concat('index.js'))
-//         .pipe(rename({suffix: '.min'}))
-//         .pipe(uglify())
-//         .pipe(gulp.dest('app/dist'))
-//         .pipe(browserSync.reload({stream: true}))
-// });
-
-
 
 gulp.task('scripts', () => {
-   var all = gulp.src([
+   let all = gulp.src([
      "app/js/Helper.js",
      "app/js/App.js",
      "app/js/components/*.js"
   ])
+   .pipe(plumber()) // plumber
    .pipe(sourcemaps.init())
    .pipe(babel({
            presets: ['es2015']
        }));
 
-  var polyfills = all.pipe(autopolyfiller('polyfills.js', {
+  let libs = gulp.src([
+    "app/libs/*.js"
+  ])
+  .pipe(concat('libs.js'));
+
+  let polyfills = all.pipe(autopolyfiller('polyfills.js', {
      browsers: [ 'Android 2.3',
                  'Android 4',
                  'Chrome 20',
@@ -107,16 +79,18 @@ gulp.task('scripts', () => {
                  'Safari 6']
  }));
 
-  return merge(polyfills, all)
+  return merge(polyfills, all, libs)
     .pipe(order([
         'polyfills.js',
+        'libs.js',
         'all.js'
     ]))
-    
+
     .pipe(concat('build.min.js'))
     .pipe(uglify())
     .pipe(sourcemaps.write())
     .pipe(gulp.dest('app/dist'))
+
     .pipe(browserSync.reload({stream: true}))
 });
 
