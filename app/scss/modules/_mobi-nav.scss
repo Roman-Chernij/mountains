@@ -2,10 +2,14 @@
   position: absolute;
   top: 50px;
   right: 0;
+  display: none;
   .nav-list {
     flex-direction: column;
     &__item {
       padding: 10px 0;
     }
+  }
+  @media(max-width: $media-xs) {
+    display: block;
   }
 }
